@@ -5,8 +5,8 @@
 // - smash them together
 
 import { connect } from 'react-redux';
-import PokeList from '../components/PokeList';
-import { catchCard } from '../actions-reducers';
+import VisibilityButton from '../components/VisibilityButton';
+import { setVisibilityAll, setVisibilityCaught, setVisibilityUncaught } from '../actions-reducers';
 
 // We have two jobs:
 // - tell it how to map redux state to react props
@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
     // return our own custom props object 
     return {
         // react: redux
-        cards: state.cards
+        visibility: state.visibilityFilter
     }
 };
 
@@ -26,10 +26,19 @@ const mapDispatchToProps = (dispatch) => {
     // return our own custom props object 
     return {
         // The anonymous function is *just like* our this._helperFunction
-        handleClick: (id) => {
+        handleClickAll: () => {
             // behind the scenes, 
             // redux is doing the same our "setState"
-            dispatch(catchCard(id))
+            console.log('all');
+            dispatch(setVisibilityAll())
+        },
+        handleClickCaught: () => {
+            console.log('caught bitches');
+            dispatch(setVisibilityCaught())
+        },
+        handleClickUncaught: () => {
+            console.log('uncaught mothafucka');
+            dispatch(setVisibilityUncaught())
         }
     };
 };
@@ -39,6 +48,6 @@ const makeComponentSmart = connect(
     mapStateToProps, 
     mapDispatchToProps
 );
-const SmartPokeList = makeComponentSmart(PokeList);
+const SmartVisibilityButton = makeComponentSmart(VisibilityButton);
 
-export default SmartPokeList;
+export default SmartVisibilityButton;
