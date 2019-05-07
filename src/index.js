@@ -114,6 +114,7 @@ function visibility(state=initialState.visibilityFilter, action={type: ''}) {
     }
 }
 
+// This is where you are assigning responsibility of one piece of state to one reducer
 const rootReducer = combineReducers({
     cards: cards, 
     visibilityFilter: visibility
